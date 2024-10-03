@@ -31,9 +31,6 @@ public class Funcionario extends Elemento implements Serializable {
 
     @Override
     public String toString() {
-        return "Funcionario{" +
-                "nombre='" + nombre + '\'' +
-                ", puesto='" + puesto + '\'' +
-                '}';
+        return "Funcionario: \n" + "nombre: " + nombre + '\'' + "\n puesto: " + puesto + '\'';
     }
 }
