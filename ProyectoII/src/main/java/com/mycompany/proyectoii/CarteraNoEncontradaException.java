@@ -5,4 +5,3 @@ public class CarteraNoEncontradaException extends Exception {
         super(mensaje);
     }
 }
-
