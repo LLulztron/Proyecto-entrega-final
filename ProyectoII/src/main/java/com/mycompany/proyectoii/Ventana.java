@@ -57,29 +57,27 @@ public class Ventana extends JFrame {
 
         // Acción para agregar un funcionario
         btnAgregarFuncionario.addActionListener(e -> {
-    // Solicitar el nombre de la cartera
     String nombreCartera = JOptionPane.showInputDialog("Nombre de la Cartera:");
-    
-    // Verificamos si la cartera existe en el sistema
-    if (nombreCartera == null || nombreCartera.isEmpty() || 
-            sistema.getCarteras().get(nombreCartera) == null) {
-        JOptionPane.showMessageDialog(null, "La cartera no existe o no ha sido ingresada. Por favor, ingrese una cartera válida.",
-                "Error", JOptionPane.ERROR_MESSAGE);
-        return; // Si la cartera no existe, salimos de la acción
+    if (nombreCartera == null || nombreCartera.isEmpty() || sistema.getCarteras().get(nombreCartera) == null) {
+        JOptionPane.showMessageDialog(null, "La cartera no existe.", "Error", JOptionPane.ERROR_MESSAGE);
+        return;
     }
-    
-    // Si la cartera existe, solicitamos los datos del funcionario
-    String nombreFuncionario = JOptionPane.showInputDialog("Nombre del Funcionario:");
-    String puesto = JOptionPane.showInputDialog("Puesto del Funcionario:");
 
-    // Verificamos si los datos del funcionario son válidos
-    if (nombreFuncionario != null && !nombreFuncionario.isEmpty() && puesto != null && !puesto.isEmpty()) {
-        sistema.agregarFuncionario(nombreCartera, nombreFuncionario, puesto);
+    String nombreFuncionario = JOptionPane.showInputDialog("Nombre del Funcionario:");
+    String puesto = JOptionPane.showInputDialog("Puesto del Funcionario (dejar vacío para 'No tiene oficio'):");
+
+    if (nombreFuncionario != null && !nombreFuncionario.isEmpty()) {
+        if (puesto == null || puesto.isEmpty()) {
+            sistema.agregarFuncionario(nombreCartera, nombreFuncionario); // Usa el método sobrecargado
+        } else {
+            sistema.agregarFuncionario(nombreCartera, nombreFuncionario, puesto); // Usa el constructor con nombre y puesto
+        }
         textArea.append("Funcionario " + nombreFuncionario + " agregado a " + nombreCartera + ".\n");
     } else {
-        JOptionPane.showMessageDialog(null, "Datos del funcionario inválidos. Asegúrese de ingresar un nombre y puesto válidos.", "Error", JOptionPane.ERROR_MESSAGE);
+        JOptionPane.showMessageDialog(null, "Datos del funcionario inválidos.", "Error", JOptionPane.ERROR_MESSAGE);
     }
 });
+
 
 
         // Acción para mostrar carteras y funcionarios
@@ -87,8 +85,10 @@ public class Ventana extends JFrame {
             textArea.setText(""); // Limpiar el área de texto
             for (CarteraMinisterial cartera : sistema.getCarteras().values()) {
                 textArea.append(cartera.toString() + "\n");
+                int cont = 1;
                 for (Funcionario funcionario : cartera.getFuncionarios()) {
-                    textArea.append(" - " + funcionario + "\n\n");
+                    textArea.append(cont+") " + funcionario + "\n");
+                    cont++;
                 }
             }
         });
@@ -186,4 +186,3 @@ public class Ventana extends JFrame {
         });
     }
 }
-    
