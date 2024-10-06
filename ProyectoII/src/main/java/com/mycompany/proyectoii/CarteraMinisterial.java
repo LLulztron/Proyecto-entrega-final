@@ -15,7 +15,7 @@ public class CarteraMinisterial extends Elemento implements Serializable {
 
     @Override
     public String getNombre() {
-        return nombre; // Implementación del método abstracto
+        return nombre; // ImplementaciÃ³n del mÃ©todo abstracto
     }
 
     public void agregarFuncionario(Funcionario funcionario) {
