@@ -26,7 +26,12 @@ public class Sistema {
             cartera.agregarFuncionario(new Funcionario(nombreFuncionario, puesto));
         }
     }
-
+    public void agregarFuncionario(String nombreCartera, String nombreFuncionario) {
+        CarteraMinisterial cartera = carteras.get(nombreCartera);
+        if (cartera != null) {
+            cartera.agregarFuncionario(new Funcionario(nombreFuncionario));
+        }
+    }
     public Map<String, CarteraMinisterial> getCarteras() {
         return carteras;
     }
