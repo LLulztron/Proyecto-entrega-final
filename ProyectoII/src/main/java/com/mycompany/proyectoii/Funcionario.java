@@ -10,7 +10,11 @@ public class Funcionario extends Elemento implements Serializable {
         this.nombre = nombre;
         this.puesto = puesto;
     }
-
+    public Funcionario(String nombre) {
+        this.nombre = nombre;
+        puesto = "SIN OFICIO";
+        
+    }
     @Override
     public String getNombre() {
         return nombre; // Implementación del método abstracto
